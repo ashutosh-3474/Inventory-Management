@@ -14,6 +14,7 @@ A backend REST API for managing inventory in a small business. Built using **Nod
 - ✅ Environment-based config
 - ✅ Python test script (as provided in assignment)
 - ✅ OpenAPI (Swagger) documentation at `/api-docs`
+- ✅ Docker support for containerized deployment
 
 ---
 
@@ -24,6 +25,7 @@ A backend REST API for managing inventory in a small business. Built using **Nod
 - **Auth**: JWT + Cookies
 - **Docs**: Swagger (OpenAPI YAML)
 - **Testing**: Postman, Python test script
+- **Containerization**: Docker
 
 ---
 
@@ -31,14 +33,15 @@ A backend REST API for managing inventory in a small business. Built using **Nod
 
 ```
 ims-backend/
-├── controllers/         # Logic for auth & product
-├── middlewares/         # JWT auth middleware
-├── models/              # Mongoose schemas
-├── index.js             # Main app with all routes and Server entry point
-├── openapi.yaml         # Swagger API documentation
-├── .env                 # Environment variables
-├── test_api.py          # Python test script (assignment)
-├── ims_postman_collection.json  # Postman collection
+├── controllers/                   # Logic for auth & product
+├── middlewares/                   # JWT auth middleware
+├── models/                        # Mongoose schemas
+├── index.js                       # Main app with all routes and Server entry point
+├── Dockerfile                     # Docker configuration
+├── openapi.yaml                   # Swagger API documentation
+├── .env                           # Environment variables
+├── test_api.py                    # Python test script (assignment)
+├── ims_postman_collection.json    # Postman collection
 ├── README.md
 ```
 
@@ -52,6 +55,7 @@ ims-backend/
 - MongoDB Atlas account
 - Python 3.6+ (for testing script)
 - `requests` Python module
+- Docker (optional)
 
 ---
 
@@ -59,7 +63,8 @@ ims-backend/
 
 ```bash
 git clone https://github.com/ashutosh-3474/Inventory-Management.git
-cd ims-backend
+cd Inventory-Management/
+
 ```
 
 ---
@@ -72,19 +77,9 @@ npm install
 
 ---
 
-### 🔹 3. Create `.env` File
 
-```env
-PORT=8080
-MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/ims
-JWT_SECRET=your_jwt_secret
-```
 
-> Replace `<username>` and `<password>` with your MongoDB Atlas credentials.
-
----
-
-### 🔹 4. Run the Server
+### 🔹 3. Run the Server
 
 ```bash
 npm run dev     # Development mode using nodemon
@@ -93,6 +88,22 @@ npm start       # Production mode
 ```
 
 Server will run at: `http://localhost:8080`
+
+---
+
+## 🐳 Docker Setup (Optional)
+
+### 🔹 1. Build Docker Image
+
+```bash
+docker build -t ims-backend .
+```
+
+### 🔹 2. Run the Container
+
+```bash
+docker run -e PORT=8080 -p 8080:8080 ims-backend
+```
 
 ---
 
@@ -154,7 +165,7 @@ The documentation is based on the `openapi.yaml` file.
 - JWT is stored in cookies (`HttpOnly`, `Secure`)
 - Auth required for all `/products/*` routes
 - Token can also be passed via `Authorization: Bearer <token>` (optional)
-- AI tools is used to generate the syntax of the codes
+- AI tools were used to assist in generating the syntax and boilerplate code
 
 ---
 
